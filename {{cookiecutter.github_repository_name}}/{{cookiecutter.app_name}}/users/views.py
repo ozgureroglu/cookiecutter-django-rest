@@ -1,27 +1,24 @@
-from rest_framework import viewsets, mixins
-from rest_framework.permissions import AllowAny
-from .models import User
-from .permissions import IsUserOrReadOnly
-from .serializers import CreateUserSerializer, UserSerializer
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from rest_framework import permissions
+from .serializers import UserSerializer,GroupSerializer
 
-
-class UserViewSet(mixins.RetrieveModelMixin,
-                  mixins.UpdateModelMixin,
-                  viewsets.GenericViewSet):
+class UserViewSet(viewsets.ModelViewSet):
     """
-    Updates and retrieves user accounts
+    API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all()
+    queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = (IsUserOrReadOnly,)
+    {% if cookiecutter.authenticated_api == "True" %}
+    # permission_classes = [permissions.IsAuthenticated]
+    {% elif cookiecutter.authenticated_api == "False" %}
+    permission_classes = [permissions.AllowAny]
+    {% endif %}
 
-
-class UserCreateViewSet(mixins.CreateModelMixin,
-                        viewsets.GenericViewSet):
+class GroupViewSet(viewsets.ModelViewSet):
     """
-    Creates user accounts
+    API endpoint that allows groups to be viewed or edited.
     """
-    queryset = User.objects.all()
-    serializer_class = CreateUserSerializer
-    permission_classes = (AllowAny,)
-        
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]

@@ -5,4 +5,6 @@
     "description": "Its all about a Weissman score > 5.0",
     "github_username": "The owner of the repository. Either your github username or organization name.",
     "service_port": "8989",
+    "deployment_target": ["aws","gce","azure"],
+    "authenticated_api": ["True","False"]
 }

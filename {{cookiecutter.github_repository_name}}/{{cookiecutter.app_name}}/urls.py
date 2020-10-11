@@ -5,11 +5,15 @@ from django.contrib import admin
 from django.views.generic.base import RedirectView
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
-from .users.views import UserViewSet, UserCreateViewSet
+{%for n in cookiecutter.models.name %}
+from .ms_api.views import {{n}}ViewSet
+{%endfor%}
+
 
 router = DefaultRouter()
-router.register(r'users', UserViewSet)
-router.register(r'users', UserCreateViewSet)
+{%for n in cookiecutter.models.name %}
+router.register(r'{{n|lower}}', {{n}}ViewSet)
+{%endfor%}
 
 urlpatterns = [
     path('admin/', admin.site.urls),

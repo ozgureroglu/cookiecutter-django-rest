@@ -6,5 +6,6 @@
     "github_username": "The owner of the repository. Either your github username or organization name.",
     "service_port": "8989",
     "deployment_target": ["aws","gce","azure"],
-    "authenticated_api": ["True","False"]
+    "authenticated_api": ["True","False"],
+    "models": {"name":["AAA"]}
 }

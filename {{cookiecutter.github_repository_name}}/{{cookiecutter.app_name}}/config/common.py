@@ -23,7 +23,7 @@ class Common(Configuration):
         'django_filters',            # for filtering rest endpoints
 
         # Your apps
-        '{{cookiecutter.app_name}}.users',
+        '{{cookiecutter.app_name}}.ms_api',
 
     )
 
@@ -182,26 +182,26 @@ class Common(Configuration):
     # # Custom user app
     # AUTH_USER_MODEL = 'users.User'
 
-    # Django Rest Framework
-    REST_FRAMEWORK = {
-        'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-        'PAGE_SIZE': int(os.getenv('DJANGO_PAGINATION_LIMIT', 10)),
-        'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S%z',
-        'DEFAULT_RENDERER_CLASSES': (
-            'rest_framework.renderers.JSONRenderer',
-            'rest_framework.renderers.BrowsableAPIRenderer',
-        ),
-        {% if cookiecutter.authenticated_api == "True" %}
-            'DEFAULT_PERMISSION_CLASSES': [
-                'rest_framework.permissions.IsAuthenticated',
-            ]
-            ,
-            'DEFAULT_AUTHENTICATION_CLASSES': (
-                'rest_framework.authentication.SessionAuthentication',
-                'rest_framework.authentication.TokenAuthentication',
-            )
-        {% elif cookiecutter.authenticated_api == "False" %}
-             'DEFAULT_AUTHENTICATION_CLASSES': [],
-             'DEFAULT_PERMISSION_CLASSES': []
-        {% endif %}
-    }
+    # # Django Rest Framework
+    # REST_FRAMEWORK = {
+    #     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    #     'PAGE_SIZE': int(os.getenv('DJANGO_PAGINATION_LIMIT', 10)),
+    #     'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S%z',
+    #     'DEFAULT_RENDERER_CLASSES': (
+    #         'rest_framework.renderers.JSONRenderer',
+    #         'rest_framework.renderers.BrowsableAPIRenderer',
+    #     ),
+    #     {% if cookiecutter.authenticated_api == "True" %}
+    #         'DEFAULT_PERMISSION_CLASSES': [
+    #             'rest_framework.permissions.IsAuthenticated',
+    #         ]
+    #         ,
+    #         'DEFAULT_AUTHENTICATION_CLASSES': (
+    #             'rest_framework.authentication.SessionAuthentication',
+    #             'rest_framework.authentication.TokenAuthentication',
+    #         )
+    #     {% elif cookiecutter.authenticated_api == "False" %}
+    #          'DEFAULT_AUTHENTICATION_CLASSES': [],
+    #          'DEFAULT_PERMISSION_CLASSES': []
+    #     {% endif %}
+    # }
